@@ -14,13 +14,13 @@ from utils.helpers import stratified_split
 
 def main():
     # Configuration
-    BATCH_SIZE = 8
+    BATCH_SIZE = 16
     LEARNING_RATE = 0.0005
     NUM_EPOCHS = 150
     PATIENCE = 20
     DATA_DIR = 'data/assessment-data'
     TRAIN_RATIO = 0.7
-    AUGMENTATION_MULTIPLIER = 5
+    AUGMENTATION_MULTIPLIER = 8
     USE_STRONG_AUGMENTATION = True
     USE_TTA = True
 
@@ -50,9 +50,9 @@ def main():
                           [base_dataset.labels[i] for i in val_indices])
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True,
-                             num_workers=2, pin_memory=True if device.type=='cuda' else False)
+                             num_workers=6, pin_memory=True if device.type=='cuda' else False)
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False,
-                           num_workers=2, pin_memory=True if device.type=='cuda' else False)
+                           num_workers=6, pin_memory=True if device.type=='cuda' else False)
 
     print(f"\nFinal dataset sizes:")
     print(f"Training: {len(train_dataset)} samples")
